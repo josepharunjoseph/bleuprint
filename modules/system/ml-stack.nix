@@ -7,7 +7,7 @@
     # Python ML packages
     python313Packages.pytorch      # https://pytorch.org/ - Deep learning framework
     python313Packages.torchvision  # Computer vision for PyTorch
-    python313Packages.tensorflow   # https://tensorflow.org/ - ML framework
+    #python313Packages.tensorflow   # https://tensorflow.org/ - ML framework
     python313Packages.scikit-learn # https://scikit-learn.org/ - ML library
     python313Packages.pandas       # https://pandas.pydata.org/ - Data analysis
     python313Packages.numpy        # https://numpy.org/ - Numerical computing
@@ -16,12 +16,12 @@
     python313Packages.ipython      # Enhanced Python shell
     
     # Data processing tools
-    apache-spark  # https://spark.apache.org/ - Big data processing
+    # apache-spark not available in nixpkgs
     duckdb        # https://duckdb.org/ - In-process SQL OLAP
-    polars        # https://github.com/pola-rs/polars - Fast DataFrame library
+    # polars        # Check if available
     
     # Visualization
-    plotly        # https://plotly.com/ - Interactive graphs
+    # plotly        # Check if available
     
     # GPU tools (for Apple Silicon)
     # Note: Metal performance shaders are included with macOS

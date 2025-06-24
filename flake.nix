@@ -16,9 +16,21 @@
     darwinConfigurations."bleuprint" = nix-darwin.lib.darwinSystem {
       inherit system;
       modules = [
-        # Import modular configuration files
+        # Core system configuration
         ./modules/system/core.nix
         ./modules/system/cli-utils.nix
+        ./modules/system/dev-tools.nix
+        
+        # Language-specific development stacks
+        ./modules/languages/python.nix
+        ./modules/languages/rust.nix
+        ./modules/languages/javascript.nix
+        ./modules/languages/go.nix
+        
+        # Optional: ML/Data Science stack (uncomment to enable)
+        # ./modules/system/ml-stack.nix
+        
+        # Homebrew applications
         ./modules/homebrew/apps.nix
         
         # Home Manager configuration

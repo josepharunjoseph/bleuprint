@@ -29,8 +29,13 @@ setup: install-nix setup-hooks
 
 # === VALIDATION COMMANDS ===
 
-# Validate Nix configuration
+# Comprehensive validation (syntax, flakes, conflicts, builds)
 validate:
+    @echo "Running comprehensive validation..."
+    @./scripts/validate-all.sh
+
+# Legacy Nix validation (kept for compatibility)
+validate-nix:
     @echo "Validating Nix configuration..."
     @./scripts/validate-nix.sh
 
@@ -124,12 +129,12 @@ branch name:
 
 # === CI/CD COMMANDS ===
 
-# Simulate CI locally
+# Simulate CI locally (comprehensive)
 ci:
     @echo "Simulating CI pipeline locally..."
     @just validate
     @just test
-    @just build-dry
+    @just security
     @echo "CI simulation complete! ✅"
 
 # Run security checks
