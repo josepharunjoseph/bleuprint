@@ -41,8 +41,8 @@ jobs:
         
     - name: Test reproducibility (acceptance criteria #2)
       run: |
-        HASH1=$(nix build .#darwinConfigurations.testhost.system --dry-run --json | jq -r '.[0].drvPath')
-        HASH2=$(nix build .#darwinConfigurations.testhost.system --dry-run --json | jq -r '.[0].drvPath') 
+        HASH1=$(nix build .#darwinConfigurations.bleuprint.system --dry-run --json | jq -r '.[0].drvPath')
+        HASH2=$(nix build .#darwinConfigurations.bleuprint.system --dry-run --json | jq -r '.[0].drvPath') 
         if [[ "$HASH1" != "$HASH2" ]]; then
           echo "❌ Reproducibility test failed - derivation hashes differ"
           exit 1
@@ -51,7 +51,7 @@ jobs:
         
     - name: Build configuration (dry-run)
       run: |
-        nix build .#darwinConfigurations.testhost.system --dry-run
+        nix build .#darwinConfigurations.bleuprint.system --dry-run
         
     - name: Test bootstrap script integrity
       run: |
