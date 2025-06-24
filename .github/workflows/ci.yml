@@ -49,9 +49,9 @@ jobs:
         fi
         echo "✅ Reproducibility test passed"
         
-    - name: Build configuration (dry-run)
-      run: |
-        nix build .#darwinConfigurations.bleuprint.system --dry-run
+          - name: Build configuration (dry-run)
+        run: |
+          cd .github && nix build .#darwinConfigurations.bleuprint.system --dry-run
         
     - name: Test bootstrap script integrity
       run: |

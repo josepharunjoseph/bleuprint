@@ -49,10 +49,21 @@
   };
 
   # Enable Touch ID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
-  # Services
-  services.nix-daemon.enable = true;
+
+
+  # Primary user setting (required for system defaults)
+  system.primaryUser = "YOUR-USERNAME";
+  
+  # Define user for home-manager (template variable will be replaced)
+  users.users.YOUR-USERNAME = {
+    name = "YOUR-USERNAME";
+    home = "/Users/YOUR-USERNAME";
+  };
+  
+  # System state version
+  system.stateVersion = 6;
   
   # Post-rebuild tool discovery
   system.activationScripts.toolDiscovery.text = ''
@@ -78,7 +89,7 @@
     # Harden against power loss (Nix 2.25+)
     fsync-metadata = true;
     # Additional performance and security settings
-    auto-optimise-store = true;
+    # auto-optimise-store is deprecated, use nix.optimise.automatic instead
     sandbox = true;
     max-jobs = "auto";
     cores = 0; # Use all available cores
@@ -99,4 +110,7 @@
     keep-outputs = true;
     keep-derivations = true;
   };
+
+  # Enable automatic Nix store optimization
+  nix.optimise.automatic = true;
 } 

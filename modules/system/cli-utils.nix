@@ -12,7 +12,7 @@
     neovim       # https://neovim.io/doc/ - Modern vim
     jq           # https://jqlang.github.io/jq/manual/ - JSON processor
     btop         # https://github.com/aristocratos/btop - Resource monitor (default choice)
-    erd          # https://github.com/solidiquis/erdtree - Modern tree in Rust
+    erdtree      # https://github.com/solidiquis/erdtree - Modern tree in Rust
     
     # Productivity CLI tools
     tealdeer     # https://github.com/dbrgn/tealdeer - Fast tldr client (Rust-based)
@@ -64,7 +64,7 @@
     lsd          # https://github.com/lsd-rs/lsd - Next-gen ls (alternative to eza)
     broot        # https://github.com/Canop/broot - Better tree navigation
     mcfly        # https://github.com/cantino/mcfly - Smart shell history (alternative to atuin)
-    sk           # https://github.com/lotabout/skim - Fuzzy finder in Rust (alternative to fzf)
+    skim         # https://github.com/lotabout/skim - Fuzzy finder in Rust (alternative to fzf)
     bandwhich    # https://github.com/imsnif/bandwhich - Network utilization by process
     grex         # https://github.com/pemistahl/grex - Generate regex from examples
     hexyl        # https://github.com/sharkdp/hexyl - Hex viewer
@@ -73,13 +73,12 @@
     
     # System tools
     lsof         # https://github.com/lsof-org/lsof - List open files
-    dtruss       # System call tracer (macOS)
-    fs_usage     # File system usage (macOS)
+    # Note: dtruss and fs_usage are built into macOS
     
     # Security tools  
     age          # https://github.com/FiloSottile/age - Modern encryption
     sops         # https://github.com/mozilla/sops - Secrets management
-    gpg          # GNU Privacy Guard
+    gnupg        # GNU Privacy Guard
     yubikey-manager  # https://github.com/Yubico/yubikey-manager - YubiKey management
     
     # Container/VM tools
@@ -88,7 +87,7 @@
     dive         # https://github.com/wagoodman/dive - Docker image explorer
     
     # Performance analysis
-    perf         # Performance analysis tools
+    # Note: perf is Linux-specific, use macOS Instruments instead
     flamegraph   # https://github.com/flamegraph-rs/flamegraph - Flame graph profiler
     
     # Additional dev tools

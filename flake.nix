@@ -13,7 +13,7 @@
   let 
     system = "aarch64-darwin";
   in {
-    darwinConfigurations."testhost" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."bleuprint" = nix-darwin.lib.darwinSystem {
       inherit system;
       modules = [
         # Import modular configuration files
@@ -25,7 +25,7 @@
         home-manager.darwinModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.testuser = import ./modules/home/default.nix;
+          home-manager.users.YOUR-USERNAME = import ./modules/home/default.nix;
         }
       ];
     };

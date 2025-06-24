@@ -54,80 +54,97 @@ jobs:
           # Keep only essential files
           echo "✅ Removed template-specific files"
 
-      - name: Customize configuration files
-        run: |
-          echo "🔧 Customizing configuration for new repository..."
-          
-          # Update flake.nix with new repository name
-          sed -i "s/bleuprint/${{ steps.repo-info.outputs.repo }}/g" flake.nix
-          sed -i "s/bleulabs/${{ steps.repo-info.outputs.owner }}/g" flake.nix
-          
-          # Update _config.yml if it exists
-          if [ -f "_config.yml" ]; then
-            sed -i "s/bleuprint/${{ steps.repo-info.outputs.repo }}/g" _config.yml
-            sed -i "s/bleulabs/${{ steps.repo-info.outputs.owner }}/g" _config.yml
-            sed -i "s|https://bleulabs.github.io|https://${{ steps.repo-info.outputs.owner }}.github.io|g" _config.yml
-            sed -i "s|/bleuprint|/${{ steps.repo-info.outputs.repo }}|g" _config.yml
-          fi
-          
-          # Update install.sh
-          sed -i "s/bleuprint/${{ steps.repo-info.outputs.repo }}/g" install.sh
-          
-          echo "✅ Updated configuration files"
+             - name: Customize configuration files
+          run: |
+           echo "🔧 Customizing configuration for new repository..."
+           
+           # Update flake.nix with new repository name
+           sed -i "s/bleuprint/${{ steps.repo-info.outputs.repo }}/g" flake.nix
+           sed -i "s/bleulabs/${{ steps.repo-info.outputs.owner }}/g" flake.nix
+           
+           # Update _config.yml if it exists
+           if [ -f "_config.yml" ]; then
+             sed -i "s/bleuprint/${{ steps.repo-info.outputs.repo }}/g" _config.yml
+             sed -i "s/bleulabs/${{ steps.repo-info.outputs.owner }}/g" _config.yml
+             sed -i "s|https://bleulabs.github.io|https://${{ steps.repo-info.outputs.owner }}.github.io|g" _config.yml
+             sed -i "s|/bleuprint|/${{ steps.repo-info.outputs.repo }}|g" _config.yml
+           fi
+           
+           # Update install.sh
+           sed -i "s/bleuprint/${{ steps.repo-info.outputs.repo }}/g" install.sh
+           
+           # Fix README placeholders
+           sed -i "s/YOUR-USERNAME/${{ steps.repo-info.outputs.owner }}/g" README.md
+           sed -i "s/YOUR-REPO/${{ steps.repo-info.outputs.repo }}/g" README.md
+           
+           echo "✅ Updated configuration files"
 
-      - name: Create personalized README
-        run: |
-          echo "📝 Creating personalized README..."
-          
-          cat > README.md << 'EOF'
-          # ${{ steps.repo-info.outputs.repo }}
-          
-          > Modern macOS development environment powered by Nix-Darwin
-          
-          ## Quick Start
-          
-          ```bash
-          # Clone and install
-          git clone https://github.com/${{ steps.repo-info.outputs.full_name }}.git
-          cd ${{ steps.repo-info.outputs.repo }}
-          ./install.sh
-          ```
-          
-          ## What's Included
-          
-          - **120+ modern developer tools** via Nix packages
-          - **Homebrew integration** for GUI apps
-          - **Shell configuration** (Zsh with Starship prompt)
-          - **Git configuration** with modern tools (Delta, etc.)
-          - **Development tools** (Docker, Kubernetes, etc.)
-          - **Security-first** approach with reproducible builds
-          
-          ## Customization
-          
-          Edit the configuration files in `modules/` to customize your setup:
-          
-          - `modules/system/` - System-level packages and settings
-          - `modules/home/` - User-level configuration and dotfiles
-          - `modules/homebrew/` - GUI applications via Homebrew
-          
-          ## Documentation
-          
-          - [Setup Guide](docs/SETUP.md) - Detailed installation instructions
-          - [Configuration Options](docs/CONFIG_OPTIONS.md) - Available customization options
-          - [CLI Cheatsheet](docs/CLI_CHEATSHEET.md) - Quick reference for tools
-          
-          ## Requirements
-          
-          - macOS 12+ (Monterey or later)
-          - Admin access for initial setup
-          - Internet connection for downloading packages
-          
-          ## License
-          
-          MIT License - see [LICENSE](LICENSE) for details.
-          EOF
-          
-          echo "✅ Created personalized README"
+             - name: Create personalized README
+          run: |
+           echo "📝 Creating personalized README..."
+           
+           cat > README.md << 'EOF'
+           # ${{ steps.repo-info.outputs.repo }}
+           
+           > Modern macOS development environment powered by Nix-Darwin
+           
+           ## Quick Start
+           
+           ```bash
+           # Clone and install
+           git clone https://github.com/${{ steps.repo-info.outputs.full_name }}.git
+           cd ${{ steps.repo-info.outputs.repo }}
+           ./install.sh
+           ```
+           
+           ## What's Included
+           
+           - **120+ modern developer tools** via Nix packages
+           - **Homebrew integration** for GUI apps
+           - **Shell configuration** (Zsh with Starship prompt)
+           - **Git configuration** with modern tools (Delta, etc.)
+           - **Development tools** (Docker, Kubernetes, etc.)
+           - **Security-first** approach with reproducible builds
+           
+           ## Customization
+           
+           Edit the configuration files in `modules/` to customize your setup:
+           
+           - `modules/system/` - System-level packages and settings
+           - `modules/home/` - User-level configuration and dotfiles
+           - `modules/homebrew/` - GUI applications via Homebrew
+           
+           ## Documentation
+           
+           - [Setup Guide](docs/SETUP.md) - Detailed installation instructions
+           - [Configuration Options](docs/CONFIG_OPTIONS.md) - Available customization options
+           - [CLI Cheatsheet](docs/CLI_CHEATSHEET.md) - Quick reference for tools
+           
+           ## Requirements
+           
+           - macOS 12+ (Monterey or later)
+           - Admin access for initial setup
+           - Internet connection for downloading packages
+           
+           ## Contributing
+           
+           Contributions are welcome! Please feel free to submit a Pull Request.
+           
+           ## License
+           
+           MIT License - see [LICENSE](LICENSE) for details.
+           
+           ---
+           
+           <p align="center">
+             Made with ❤️ for the Mac development community<br>
+             <a href="https://github.com/${{ steps.repo-info.outputs.full_name }}/stargazers">⭐ Star this repo</a> •
+             <a href="https://github.com/${{ steps.repo-info.outputs.full_name }}/issues">🐛 Report an issue</a> •
+             <a href="https://github.com/${{ steps.repo-info.outputs.full_name }}/discussions">💬 Discussions</a>
+           </p>
+           EOF
+           
+           echo "✅ Created personalized README"
 
       - name: Update home configuration
         run: |
