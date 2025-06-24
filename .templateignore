@@ -1,0 +1,32 @@
+# Files to exclude when using this repository as a GitHub template
+# These are development/maintenance files not needed by end users
+
+# Development and testing scripts
+scripts/validate-nix.sh
+scripts/test-suite.sh
+scripts/setup-git-hooks.sh
+justfile
+
+# Template-specific documentation
+docs/TEMPLATE_INFO.md
+docs/CONTRIBUTING.md
+docs/CODE_OF_CONDUCT.md
+docs/SECURITY.md
+
+# GitHub template files
+.github/ISSUE_TEMPLATE/
+.github/PULL_REQUEST_TEMPLATE/
+.github/FUNDING.yml
+.github/repository.yml
+.github/template-cleanup.yml
+
+# Development artifacts
+flake.lock
+result
+result-*
+
+# Git hooks directory (will be recreated if needed)
+.githooks/
+
+# Template-specific CI workflows
+.github/workflows/sync-install-script.yml 

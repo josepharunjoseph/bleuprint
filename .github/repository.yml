@@ -1,20 +1,35 @@
-# Repository metadata for GitHub
-name: "bleuprint"
-description: "🎯 Modern Mac development environment template with 120+ tools using Nix-Darwin. Security-first, reproducible, one-command setup."
-homepage: "https://github.com/bleulabs/bleuprint"
+# Repository configuration for GitHub template
+name: bleuprint
+description: "Bootstrap your Mac with 120+ modern developer tools using Nix-Darwin. Security-first, reproducible, one-command setup."
 topics:
-  - "nix"
-  - "nix-darwin"  
-  - "macos"
-  - "dotfiles"
-  - "development-environment"
-  - "template"
-  - "cli-tools"
-  - "rust"
-  - "security"
-  - "reproducible"
-  - "homebrew"
-  - "setup"
-  - "bootstrap"
-  - "modern-tools"
-  - "developer-tools" 
+  - nix
+  - nix-darwin
+  - macos
+  - dotfiles
+  - development-environment
+  - homebrew
+  - zsh
+  - starship
+  - modern-tools
+  - template
+
+# Template repository settings
+template: true
+homepage: "https://bleulabs.github.io/bleuprint"
+license: mit
+
+# Repository features
+has_issues: true
+has_projects: false
+has_wiki: false
+has_downloads: true
+
+# Security settings
+security_and_analysis:
+  secret_scanning:
+    status: enabled
+  secret_scanning_push_protection:
+    status: enabled
+
+# Default branch
+default_branch: master 

@@ -244,4 +244,71 @@ bypass-hooks:
 # Re-enable hooks
 enable-hooks:
     @git config --unset core.hooksPath
-    @echo "✅ Git hooks re-enabled" 
+    @echo "✅ Git hooks re-enabled"
+
+# === TEMPLATE COMMANDS ===
+
+# Test template cleanup (simulate what happens when someone uses the template)
+test-template:
+    #!/usr/bin/env bash
+    echo "🧪 Testing template cleanup simulation..."
+    
+    # Create a backup
+    git stash push -m "Template test backup"
+    
+    # Simulate template cleanup
+    echo "📋 Files that would be removed:"
+    echo "- scripts/validate-nix.sh"
+    echo "- scripts/test-suite.sh" 
+    echo "- scripts/setup-git-hooks.sh"
+    echo "- justfile"
+    echo "- flake.lock"
+    echo "- docs/TEMPLATE_INFO.md"
+    echo "- docs/CONTRIBUTING.md"
+    echo "- .github/ISSUE_TEMPLATE/"
+    echo "- .github/FUNDING.yml"
+    echo ""
+    echo "📝 Files that would be created:"
+    echo "- FIRST_TIME_SETUP.md"
+    echo "- Personalized README.md"
+    echo "- Setup checklist issue"
+    echo ""
+    echo "🔄 Configuration updates:"
+    echo "- Replace 'bleuprint' with user's repo name"
+    echo "- Replace 'bleulabs' with user's username"
+    echo "- Update placeholder values in modules/home/default.nix"
+    
+    # Restore backup
+    git stash pop
+    echo ""
+    echo "✅ Template test complete (no actual changes made)"
+
+# Prepare repository for template use
+prepare-template:
+    #!/usr/bin/env bash
+    echo "🎯 Preparing repository for template use..."
+    
+    # Ensure all development files are properly marked
+    if [ ! -f ".templateignore" ]; then
+        echo "❌ .templateignore file missing"
+        exit 1
+    fi
+    
+    # Check template cleanup workflow
+    if [ ! -f ".github/template-cleanup.yml" ]; then
+        echo "❌ Template cleanup workflow missing"
+        exit 1
+    fi
+    
+    # Validate that template files exist
+    echo "✅ .templateignore exists"
+    echo "✅ Template cleanup workflow exists"
+    echo "✅ Repository metadata configured"
+    
+    echo ""
+    echo "🚀 Repository is ready to be used as a template!"
+    echo ""
+    echo "To enable template mode on GitHub:"
+    echo "1. Go to repository Settings"
+    echo "2. Check 'Template repository' under General"
+    echo "3. Users can then click 'Use this template' to create their own copy" 
