@@ -1,0 +1,45 @@
+name: Sync Install Script
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - 'scripts/quick-install.sh'
+  workflow_dispatch:
+
+jobs:
+  sync-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Copy install script
+        run: |
+          cp scripts/quick-install.sh install.sh
+          
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Commit changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add install.sh
+          git commit -m "Auto-sync: Update install.sh from scripts/quick-install.sh" || exit 0
+          
+      - name: Push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: master 

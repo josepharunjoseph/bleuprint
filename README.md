@@ -31,7 +31,7 @@ If you find **bleuprint** helpful, please consider starring it! Your stars help 
 
 ```bash
 # One-liner: Download and run with sensible defaults
-curl -fsSL https://raw.githubusercontent.com/bleulabs/bleuprint/master/scripts/quick-install.sh | bash
+curl -fsSL https://bleulabs.github.io/bleuprint/install.sh | bash
 ```
 
 **What this does:**
