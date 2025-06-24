@@ -26,13 +26,29 @@ If you find **bleuprint** helpful, please consider starring it! Your stars help 
 
 ## 🚀 Quick Start
 
-### Using This Template
+### 🏃‍♂️ Ultra-Quick Setup (For the Laziest)
+
+```bash
+# One-liner: Download and run with sensible defaults
+curl -fsSL https://raw.githubusercontent.com/bleulabs/bleuprint/master/scripts/quick-install.sh | bash
+```
+
+**What this does:**
+- ✅ Downloads the latest bleuprint template
+- ✅ Installs Nix (if not present)
+- ✅ Sets up all 120+ tools with sensible defaults
+- ✅ Configures modern shell aliases
+- ✅ No manual configuration required!
+
+> ⚠️ **Note**: Uses sensible defaults (`Developer`, `dev@example.local`, hostname: `macbook`). For production use with your personal details, follow the template setup below.
+
+### 📋 Using This Template (Recommended)
 
 1. Click ["Use this template"](https://github.com/new?template_name=bleuprint&template_owner=bleulabs) button above
 2. Clone your new repository
 3. Follow the [Setup Guide](./docs/SETUP.md)
 
-### TL;DR for Experienced Users
+### 🔧 TL;DR for Experienced Users
 
 ```bash
 # After creating from template, clone your new repository
