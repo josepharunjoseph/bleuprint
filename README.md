@@ -6,7 +6,13 @@
 
 > 🎯 A **template repository** for bootstrapping a modern, reproducible Mac development environment with 120+ tools using Nix-Darwin.
 
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/YOUR-USERNAME/YOUR-REPO/generate)
+[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/new?template_name=bleuprint&template_owner=bleulabs)
+[![Stars](https://img.shields.io/github/stars/bleulabs/bleuprint?style=social)](https://github.com/bleulabs/bleuprint/stargazers)
+[![Forks](https://img.shields.io/github/forks/bleulabs/bleuprint?style=social)](https://github.com/bleulabs/bleuprint/network/members)
+
+## ⭐ Star This Repository
+
+If you find **bleuprint** helpful, please consider starring it! Your stars help others discover this template and motivate continued development.
 
 ## ✨ Features
 
@@ -22,16 +28,16 @@
 
 ### Using This Template
 
-1. Click ["Use this template"](https://github.com/YOUR-USERNAME/YOUR-REPO/generate) button above
+1. Click ["Use this template"](https://github.com/new?template_name=bleuprint&template_owner=bleulabs) button above
 2. Clone your new repository
 3. Follow the [Setup Guide](./docs/SETUP.md)
 
 ### TL;DR for Experienced Users
 
 ```bash
-# Clone your repo
-git clone https://github.com/YOUR-USERNAME/YOUR-REPO.git
-cd YOUR-REPO
+# After creating from template, clone your new repository
+git clone https://github.com/yourusername/your-dotfiles.git
+cd your-dotfiles
 
 # 🔒 REQUIRED: Update configuration (for security)
 # Option A: Environment file (recommended - keeps sensitive data out of repo)
