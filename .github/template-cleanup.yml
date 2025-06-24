@@ -1,0 +1,40 @@
+# This workflow runs when someone creates a repository from this template
+# It cleans up template-specific files and customizes the repository
+
+name: Template Cleanup
+on:
+  create:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch' && github.event.ref == 'main'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Cleanup template files
+        run: |
+          # Remove this workflow
+          rm -f .github/workflows/template-cleanup.yml
+          
+          # Update README URLs
+          sed -i "s/YOUR-USERNAME/${{ github.repository_owner }}/g" README.md
+          sed -i "s/YOUR-REPO/${{ github.event.repository.name }}/g" README.md
+          sed -i "s/YOUR-USERNAME/${{ github.repository_owner }}/g" SETUP.md
+          sed -i "s/nix-darwin-dotfiles/${{ github.event.repository.name }}/g" SETUP.md
+          
+          # Update contact emails
+          sed -i "s/\[YOUR-EMAIL@example.com\]/${{ github.repository_owner }}@users.noreply.github.com/g" CODE_OF_CONDUCT.md
+          sed -i "s/\[YOUR-SECURITY-EMAIL@example.com\]/${{ github.repository_owner }}@users.noreply.github.com/g" SECURITY.md
+          
+          # Update LICENSE
+          sed -i "s/\[YOUR NAME\]/${{ github.repository_owner }}/g" LICENSE
+          
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Initial setup from template"
+          git push 

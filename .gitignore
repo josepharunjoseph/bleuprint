@@ -1,0 +1,26 @@
+# Nix
+result
+result-*
+.direnv/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# System
+*.swp
+*~
+
+# Nix build outputs
+result
+result-*
+
+# Configuration wizard output (safe, but user-specific)
+.config-wizard-summary.txt
+.system-info.txt
+
+# Environment configuration files (contain sensitive information)
+.env
+.env.local
+.env.*.local 
