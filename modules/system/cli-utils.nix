@@ -2,24 +2,23 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # Essential CLI tools
+    # Essential CLI tools (modern defaults)
     ripgrep      # https://github.com/BurntSushi/ripgrep - Fast grep alternative
-    fzf          # https://github.com/junegunn/fzf - Fuzzy finder
+    fzf          # https://github.com/junegunn/fzf - Fuzzy finder (most popular)
     bat          # https://github.com/sharkdp/bat - Better cat with syntax highlighting
-    eza          # https://github.com/eza-community/eza - Modern ls replacement
+    eza          # https://github.com/eza-community/eza - Modern ls replacement (default choice)
     fd           # https://github.com/sharkdp/fd - Fast find alternative
     tmux         # https://github.com/tmux/tmux/wiki - Terminal multiplexer
     neovim       # https://neovim.io/doc/ - Modern vim
     jq           # https://jqlang.github.io/jq/manual/ - JSON processor
-    htop         # https://htop.dev/ - Interactive process viewer
-    tree         # https://linux.die.net/man/1/tree - Directory listing
+    btop         # https://github.com/aristocratos/btop - Resource monitor (default choice)
     erd          # https://github.com/solidiquis/erdtree - Modern tree in Rust
     
     # Productivity CLI tools
-    tldr         # https://tldr.sh/ - Simplified man pages
+    tealdeer     # https://github.com/dbrgn/tealdeer - Fast tldr client (Rust-based)
     zoxide       # https://github.com/ajeetdsouza/zoxide - Smarter cd
     direnv       # https://direnv.net/ - Directory-specific environments
-    atuin        # https://github.com/atuinsh/atuin - Better shell history
+    atuin        # https://github.com/atuinsh/atuin - Better shell history (default choice)
     starship     # https://starship.rs/ - Cross-shell prompt
     
     # File management
@@ -33,9 +32,7 @@
     # Development utilities
     gh           # https://cli.github.com/manual/ - GitHub CLI
     gping        # https://github.com/orf/gping - Ping with graph
-    httpie       # https://httpie.io/docs/cli - Human-friendly HTTP client
-    xh           # https://github.com/ducaale/xh - Faster httpie in Rust
-    curlie       # https://github.com/rs/curlie - curl + httpie
+    xh           # https://github.com/ducaale/xh - Fast HTTP client (Rust-based, default choice)
     
     # Text processing
     sd           # https://github.com/chmln/sd - Intuitive find & replace

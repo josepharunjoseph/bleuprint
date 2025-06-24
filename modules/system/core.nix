@@ -53,6 +53,26 @@
 
   # Services
   services.nix-daemon.enable = true;
+  
+  # Post-rebuild tool discovery
+  system.activationScripts.toolDiscovery.text = ''
+    PREV_TOOLS=/etc/static-tool-list.txt
+    CURRENT_TOOLS=/run/current-system/sw/bin
+    
+    if [[ -d "$CURRENT_TOOLS" ]]; then
+      if [[ -f "$PREV_TOOLS" ]]; then
+        # Show newly added tools
+        NEW_TOOLS=$(comm -13 <(sort "$PREV_TOOLS") <(ls "$CURRENT_TOOLS" | sort) | head -10)
+        if [[ -n "$NEW_TOOLS" ]]; then
+          echo "✨ New tools available:"
+          echo "$NEW_TOOLS" | sed 's/^/  - /'
+        fi
+      fi
+      
+      # Update tool list
+      ls "$CURRENT_TOOLS" > "$PREV_TOOLS" 2>/dev/null || true
+    fi
+  '';
   nix.settings = {
     experimental-features = "nix-command flakes";
     # Harden against power loss (Nix 2.25+)
@@ -62,5 +82,21 @@
     sandbox = true;
     max-jobs = "auto";
     cores = 0; # Use all available cores
+    
+    # Binary cache optimization for faster rebuilds
+    substituters = [
+      "https://cache.nixos.org"
+      "https://numtide.cachix.org"  # Community cache with many Rust CLI tools
+      "https://nix-community.cachix.org"  # Nix community projects
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "numtide.cachix.org-1:2ps1kLBUWjxIneOy2Uw6kQFyy80GFUz0WCuO6qPwKOY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    
+    # Build performance optimization
+    keep-outputs = true;
+    keep-derivations = true;
   };
 } 

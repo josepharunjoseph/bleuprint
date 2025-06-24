@@ -1,7 +1,42 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail  # Exit on error, undefined vars, pipe failures
+
+# Script integrity check
+SCRIPT_HASH="$(shasum -a 256 "$0" | cut -d' ' -f1)"
+EXPECTED_HASH="${BOOTSTRAP_HASH:-}"
+
+if [ -n "$EXPECTED_HASH" ] && [ "$SCRIPT_HASH" != "$EXPECTED_HASH" ]; then
+    echo "❌ Script integrity check failed!"
+    echo "Expected: $EXPECTED_HASH"
+    echo "Got:      $SCRIPT_HASH"
+    echo "This script may have been tampered with."
+    exit 1
+fi
 
 echo "🚀 Starting Mac bootstrap..."
+echo ""
+
+# Check macOS version compatibility
+MACOS_VERSION=$(sw_vers -productVersion)
+MACOS_MAJOR=$(echo "$MACOS_VERSION" | cut -d. -f1)
+MACOS_MINOR=$(echo "$MACOS_VERSION" | cut -d. -f2)
+
+echo "Detected macOS: $MACOS_VERSION"
+
+# Require macOS 13+ (Ventura or later)
+if [ "$MACOS_MAJOR" -lt 13 ]; then
+    echo "❌ macOS 13 (Ventura) or later required"
+    echo "Current version: $MACOS_VERSION"
+    echo "Please upgrade macOS before continuing"
+    exit 1
+fi
+
+# Warn about macOS 15+ (Sequoia) potential issues
+if [ "$MACOS_MAJOR" -ge 15 ]; then
+    echo "⚠️  macOS 15+ detected - some packages may need updates"
+    echo "If you encounter issues, please check GitHub issues"
+fi
+
 echo ""
 
 # Colors for output

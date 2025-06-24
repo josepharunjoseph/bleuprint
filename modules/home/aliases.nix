@@ -15,54 +15,84 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.zsh.shellAliases = {
-      # File system replacements
-      ls = "eza --icons";
-      ll = "eza -l --icons";
-      la = "eza -la --icons";
-      lt = "eza --tree --icons";
-      tree = "erd";
+    programs.zsh.initExtra = ''
+      # Collision-safe aliases - only apply in interactive shells
+      if [[ $- == *i* ]]; then
+        # File system replacements (safe - no script conflicts)
+        alias ls="eza --icons"
+        alias ll="eza -l --icons" 
+        alias la="eza -la --icons"
+        alias lt="eza --tree --icons"
+        alias tree="erd"
+        
+        # File content viewers (conditional to avoid breaking scripts)
+        if [[ -t 1 ]] && [[ -z "$BAT_OVERRIDE_LESS" ]]; then
+          alias cat="bat"
+          # Don't alias less - breaks man pages and scripts
+        fi
+        
+        # System monitoring (safe - interactive only)
+        alias top="btop"
+        alias htop="btop" 
+        alias df="duf"
+        alias du="dust"
+        alias ps="procs"
+        
+        # Search replacements (interactive-only to avoid regex differences)
+        if [[ -t 1 ]]; then
+          alias grep="rg"
+        fi
+        alias find="fd"
+        
+        # Network tool replacements (safe)
+        alias dig="dog"
+        alias ping="gping"
+        
+        # Git replacements (safe - only affects display)
+        alias diff="delta"
+      fi
       
-      # File content viewers
-      cat = "bat";
-      less = "bat --paging=always";
+      # Alternative tools (always available, no conflicts)
+      alias ls2="lsd"
+      alias tree2="broot" 
+      alias fzf2="sk"
+      alias history2="mcfly search"
+      alias tmux2="zellij"
+      alias vim2="helix"
+      alias top2="bottom"
+      alias http2="httpie"
+      alias http3="curlie"
+      alias git2="gitui"
+      alias tldr2="tldr"
       
-      # System monitoring replacements
-      top = "btop";
-      htop = "btop";
-      df = "duf";
-      du = "dust";
-      ps = "procs";
+      # Helpful shortcuts for modern tools (no conflicts)
+      alias hex="hexyl"
+      alias regex="grex"
+      alias bench="hyperfine"
+      alias watch2="watchexec"
+      alias json="jq"
+      alias yaml="yq"
+      alias colorpicker="pastel"
+      alias codeimg="silicon"
+      alias netmon="bandwhich"
       
-      # Search replacements
-      grep = "rg";
-      find = "fd";
+      # Tool selection helpers
+      preferred_top() {
+        case "''${PREFERRED_TOP:-btop}" in
+          btop) command btop "$@" ;;
+          bottom) command bottom "$@" ;;
+          htop) command htop "$@" ;;
+          *) command btop "$@" ;;
+        esac
+      }
       
-      # Network tool replacements
-      dig = "dog";
-      ping = "gping";
-      
-      # Git replacements
-      diff = "delta";
-      
-      # Alternative tools (not replacing defaults)
-      ls2 = "lsd";
-      tree2 = "broot";
-      fzf2 = "sk";
-      history2 = "mcfly search";
-      tmux2 = "zellij";
-      vim2 = "helix";
-      
-      # Helpful shortcuts for modern tools
-      hex = "hexyl";
-      regex = "grex";
-      bench = "hyperfine";
-      watch2 = "watchexec";
-      json = "jq";
-      yaml = "yq";
-      colorpicker = "pastel";
-      codeimg = "silicon";
-      netmon = "bandwhich";
-    };
+      preferred_hist() {
+        case "''${HIST_TOOL:-atuin}" in
+          atuin) command atuin "$@" ;;
+          mcfly) command mcfly "$@" ;;
+          *) command atuin "$@" ;;
+        esac
+      }
+    '';
   };
 } 
