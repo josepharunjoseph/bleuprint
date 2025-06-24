@@ -39,7 +39,7 @@
     ripgrep          # https://github.com/BurntSushi/ripgrep - Fast grep replacement
     fd               # https://github.com/sharkdp/fd - Fast find replacement  
     bat              # https://github.com/sharkdp/bat - Cat with syntax highlighting
-    exa              # https://github.com/ogham/exa - Modern ls replacement
+    eza              # https://github.com/eza-community/eza - Modern ls replacement
     tokei            # https://github.com/XAMPPRocky/tokei - Count lines of code
     hyperfine        # https://github.com/sharkdp/hyperfine - Benchmarking tool
     dust             # https://github.com/bootandy/dust - du replacement

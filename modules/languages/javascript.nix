@@ -1,126 +1,92 @@
-# Modern JavaScript/TypeScript Development Stack
+# Modern JavaScript/TypeScript Development Stack (Bun-focused)
 { pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
-    # Node.js ecosystem
-    nodejs_20        # https://nodejs.org/docs/latest-v20.x/api/ - LTS Node.js
-    nodejs_22        # https://nodejs.org/docs/latest-v22.x/api/ - Latest Node.js
+    # Primary JavaScript runtime
+    bun              # https://bun.sh/ - Ultra-fast JavaScript runtime, bundler, transpiler & package manager
     
-    # Package managers
-    npm              # https://docs.npmjs.com/ - Default package manager
-    yarn             # https://yarnpkg.com/ - Alternative package manager
-    pnpm             # https://pnpm.io/ - Fast, disk space efficient package manager
+    # Node.js ecosystem (for compatibility)
+    nodejs_20        # https://nodejs.org/docs/latest-v20.x/api/ - LTS Node.js (compatibility)
     
     # Modern development tools
     typescript       # https://www.typescriptlang.org/ - TypeScript compiler
-    tsx              # https://github.com/esbuild-kit/tsx - TypeScript execution
-    ts-node          # https://typestrong.org/ts-node/ - TypeScript execution
     
     # Linting & formatting
     eslint           # https://eslint.org/ - JavaScript linter
     prettier         # https://prettier.io/ - Code formatter
     
-    # Build tools & bundlers
+    # Build tools & bundlers (Bun has built-in bundling, these are for compatibility)
     vite             # https://vitejs.dev/ - Fast build tool
-    webpack          # https://webpack.js.org/ - Module bundler
     esbuild          # https://esbuild.github.io/ - Extremely fast bundler
-    rollup           # https://rollupjs.org/ - Module bundler
-    
-    # Testing frameworks
-    vitest           # https://vitest.dev/ - Fast unit test framework
-    playwright       # https://playwright.dev/ - E2E testing
-    
-    # Development servers & tools
-    nodemon          # https://nodemon.io/ - Auto-restart on changes
-    concurrently     # https://github.com/open-cli-tools/concurrently - Run commands concurrently
-    
-    # Package management utilities
-    npm-check-updates # https://github.com/raineorshine/npm-check-updates - Update dependencies
-    depcheck         # https://github.com/depcheck/depcheck - Find unused dependencies
-    
-    # Documentation
-    typedoc          # https://typedoc.org/ - TypeScript documentation generator
-    
-    # Performance & analysis
-    clinic           # https://clinicjs.org/ - Performance profiling
-    
-    # React/Vue development (optional - can be separate modules)
-    nodePackages.create-react-app     # React app generator
-    nodePackages."@vue/cli"           # Vue CLI
-  ];
-  
-  # JavaScript/Node.js environment configuration
-  environment.variables = {
-    # Node.js configuration
-    NODE_ENV = "development";          # Default to development
-    NODE_OPTIONS = "--max-old-space-size=4096";  # Increase memory limit
-    
-    # npm configuration
-    NPM_CONFIG_PROGRESS = "false";     # Disable progress bar for cleaner output
-    NPM_CONFIG_AUDIT = "false";        # Disable automatic audit (can be slow)
-    
-    # TypeScript configuration
-    TS_NODE_COMPILER_OPTIONS = "{\"module\":\"commonjs\"}";
-  };
-  
-  # Shell aliases for JavaScript/TypeScript development
-  environment.shellAliases = {
-    # Node.js shortcuts
-    node20 = "node";                   # Default to Node 20 LTS
-    node22 = "${pkgs.nodejs_22}/bin/node";  # Latest Node.js
-    
-    # Package managers
-    ni = "npm install";
-    nid = "npm install --save-dev";
-    nig = "npm install --global";
-    nu = "npm uninstall";
-    nr = "npm run";
-    ns = "npm start";
-    nt = "npm test";
-    nb = "npm run build";
-    
-    # Yarn shortcuts
-    yi = "yarn install";
-    ya = "yarn add";
-    yad = "yarn add --dev";
-    yr = "yarn run";
-    ys = "yarn start";
-    yt = "yarn test";
-    yb = "yarn build";
-    
-    # pnpm shortcuts
-    pi = "pnpm install";
-    pa = "pnpm add";
-    pad = "pnpm add --save-dev";
-    pr = "pnpm run";
-    ps = "pnpm start";
-    pt = "pnpm test";
-    pb = "pnpm build";
-    
-    # TypeScript
-    tsc = "npx tsc";                   # TypeScript compiler
-    tsw = "npx tsc --watch";           # Watch mode
-    tsx-run = "npx tsx";               # Run TypeScript directly
     
     # Development tools
-    lint = "npx eslint";               # Lint JavaScript/TypeScript
-    format = "npx prettier --write";   # Format code
-    dev = "npm run dev";               # Start dev server
-    serve = "npx serve";               # Serve static files
+    nodemon          # https://nodemon.io/ - Auto-restart on changes (for Node.js projects)
+  ];
+  
+  # JavaScript/Bun environment configuration
+  environment.variables = {
+    # Bun configuration
+    BUN_INSTALL = "$HOME/.bun";              # Bun installation directory
     
-    # Testing
-    vitest = "npx vitest";             # Run Vitest
-    playwright = "npx playwright";     # Run Playwright tests
+    # Node.js configuration (for compatibility)
+    NODE_ENV = "development";                # Default to development
+    NODE_OPTIONS = "--max-old-space-size=4096";  # Increase memory limit
     
-    # Utilities
-    ncu = "npx npm-check-updates";     # Check for updates
-    depcheck = "npx depcheck";         # Check for unused deps
+    # TypeScript configuration (Bun handles this natively)
+    BUN_CONFIG_NO_CLEAR_TERMINAL_ON_RELOAD = "true";  # Keep terminal output
+  };
+  
+  # Shell aliases for Bun-focused JavaScript/TypeScript development
+  environment.shellAliases = {
+    # Bun primary commands
+    b = "bun";                             # Main Bun command
+    bi = "bun install";                    # Install dependencies
+    ba = "bun add";                        # Add dependency
+    bad = "bun add --dev";                 # Add dev dependency
+    br = "bun run";                        # Run script
+    bs = "bun start";                      # Start application
+    bt = "bun test";                       # Run tests (Bun has built-in test runner)
+    bb = "bun build";                      # Build project
+    bx = "bunx";                           # Execute package (like npx)
     
-    # Create new projects
-    create-react = "npx create-react-app";
-    create-vue = "npx @vue/create";
-    create-vite = "npx create-vite";
-    create-next = "npx create-next-app";
+    # Bun development workflow
+    dev = "bun run dev";                   # Start dev server
+    build = "bun run build";               # Build project
+    preview = "bun run preview";           # Preview build
+    
+    # TypeScript with Bun (native support)
+    tsc = "bun tsc";                       # TypeScript compiler via Bun
+    tsx = "bun run";                       # Run TypeScript directly with Bun
+    
+    # Node.js compatibility aliases
+    node = "node";                         # Node.js runtime
+    npm = "echo 'Use bun instead of npm! Try: bun install, bun add, etc.'";
+    yarn = "echo 'Use bun instead of yarn! Bun is faster and has better TypeScript support.'";
+    pnpm = "echo 'Use bun instead of pnpm! Bun includes package management natively.'";
+    
+    # Development tools
+    lint = "bun eslint";                   # Lint with ESLint via Bun
+    format = "bun prettier --write";       # Format code with Prettier via Bun
+    serve = "bun serve";                   # Serve static files with Bun
+    
+    # Testing (Bun has built-in test runner)
+    test = "bun test";                     # Run tests with Bun
+    test-watch = "bun test --watch";       # Watch mode testing
+    
+    # Create new projects (Bun equivalents)
+    create-bun = "bun create";             # Create new Bun project
+    create-react = "bun create react";     # Create React app with Bun
+    create-vue = "bun create vue";         # Create Vue app with Bun
+    create-vite = "bun create vite";       # Create Vite project with Bun
+    create-next = "bun create next-app";   # Create Next.js app with Bun
+    
+    # Package management
+    outdated = "bun outdated";             # Check for outdated packages
+    upgrade = "bun update";                # Update all packages
+    
+    # Bun-specific utilities
+    bun-upgrade = "bun upgrade";           # Upgrade Bun itself
+    bun-completions = "bun completions";   # Generate shell completions
   };
 } 

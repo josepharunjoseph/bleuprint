@@ -10,31 +10,30 @@
     # Development tools
     golangci-lint    # https://golangci-lint.run/ - Fast linters runner
     gofumpt          # https://github.com/mvdan/gofumpt - Stricter gofmt
-    goimports        # https://pkg.go.dev/golang.org/x/tools/cmd/goimports - Auto-import management
-    gotools          # https://pkg.go.dev/golang.org/x/tools - Additional Go tools
+    gotools          # https://pkg.go.dev/golang.org/x/tools - Additional Go tools (includes goimports)
     
     # Testing & coverage
     gotestsum        # https://github.com/gotestyourself/gotestsum - Enhanced go test
-    go-junit-report  # https://github.com/jstemmer/go-junit-report - Convert test output to JUnit
+    # go-junit-report  # Check if available
     
     # Debugging & profiling
     delve            # https://github.com/go-delve/delve - Go debugger
     
     # Documentation
-    godoc            # https://pkg.go.dev/golang.org/x/tools/cmd/godoc - Documentation server
+    # godoc            # Check if available (might be in gotools)
     
     # Dependency management
-    go-mod-outdated  # https://github.com/psampaz/go-mod-outdated - Check outdated dependencies
+    # go-mod-outdated  # Check if available
     
     # Code generation
-    stringer         # https://pkg.go.dev/golang.org/x/tools/cmd/stringer - Generate String() methods
+    # stringer         # Check if available (might be in gotools)
     
     # Popular Go tools
     air              # https://github.com/cosmtrek/air - Live reload for Go apps
     goreleaser       # https://goreleaser.com/ - Release automation
     
     # Web development
-    templ            # https://templ.guide/ - HTML templating language for Go
+    # templ            # Check if available
   ];
   
   # Go environment configuration
@@ -77,11 +76,11 @@
     # Code quality
     gf = "gofmt -w";                              # Format code
     gfu = "gofumpt -w";                           # Format with gofumpt
-    gi = "goimports -w";                          # Fix imports
+    gi = "goimports -w";                          # Fix imports (from gotools)
     gl = "golangci-lint run";                     # Run linters
     
     # Documentation
-    gdoc = "godoc -http=:6060";                   # Start documentation server
+    gdoc = "go doc";                              # Show documentation
     
     # Development workflow
     gw = "air";                                   # Live reload
@@ -89,7 +88,7 @@
     
     # Testing utilities
     gts = "gotestsum";                            # Enhanced test runner
-    gtj = "go test -json | go-junit-report";      # JUnit format
+    # gtj = "go test -json | go-junit-report";      # JUnit format (if available)
     
     # Debugging
     gdlv = "dlv debug";                           # Debug current package
@@ -99,7 +98,7 @@
     ge = "go env";                                # Go environment
     gls = "go list -m all";                       # List all modules
     
-    # Outdated dependencies
-    goutdated = "go-mod-outdated -update -direct"; # Check outdated deps
+    # Outdated dependencies (manual check for now)
+    # goutdated = "go-mod-outdated -update -direct"; # Check outdated deps
   };
 } 
