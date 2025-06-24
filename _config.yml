@@ -1,0 +1,58 @@
+# GitHub Pages Configuration for Bleuprint
+title: "Bleuprint - Modern Mac Development Environment"
+description: "Bootstrap your Mac with 120+ modern developer tools using Nix-Darwin. Security-first, reproducible, one-command setup."
+url: "https://bleulabs.github.io"
+baseurl: "/bleuprint"
+
+# Theme
+theme: minima
+
+# SEO and Social
+author: "BLEU"
+twitter:
+  username: bleulabs
+  card: summary_large_image
+
+# GitHub
+github:
+  repository_url: "https://github.com/bleulabs/bleuprint"
+  repository_name: "bleulabs/bleuprint"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Markdown
+markdown: kramdown
+highlighter: rouge
+
+# Collections for documentation
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "page"
+      
+# Exclude from processing
+exclude:
+  - .git/
+  - .github/
+  - .githooks/
+  - modules/
+  - scripts/
+  - flake.nix
+  - .gitignore
+  - .env.example
+  - LICENSE
+  - vendor/
+  - Gemfile
+  - Gemfile.lock 

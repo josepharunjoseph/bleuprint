@@ -7,6 +7,7 @@
 > 🎯 A **template repository** for bootstrapping a modern, reproducible Mac development environment with 120+ tools using Nix-Darwin.
 
 [![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/new?template_name=bleuprint&template_owner=bleulabs)
+[![Website](https://img.shields.io/badge/Website-bleulabs.github.io/bleuprint-blue?style=for-the-badge)](https://bleulabs.github.io/bleuprint)
 [![Stars](https://img.shields.io/github/stars/bleulabs/bleuprint?style=social)](https://github.com/bleulabs/bleuprint/stargazers)
 [![Forks](https://img.shields.io/github/forks/bleulabs/bleuprint?style=social)](https://github.com/bleulabs/bleuprint/network/members)
 
@@ -227,6 +228,7 @@ modules = [
 
 ## 🔗 Quick Links
 
+- [**🌐 Official Documentation**](https://bleulabs.github.io/bleuprint)
 - [Configuration Options](./docs/CONFIG_OPTIONS.md) - All available settings
 - [CLI Cheatsheet](./docs/CLI_CHEATSHEET.md) - Quick command reference
 - [Setup Guide](./docs/SETUP.md) - Detailed installation instructions
