@@ -41,9 +41,9 @@
       py = "python3";
       
       # Quick navigation
-      ..  = "cd ..";
-      ... = "cd ../..";
-      .... = "cd ../../..";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
       
       # Safety aliases
       rm = "rm -i";
