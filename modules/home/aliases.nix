@@ -15,7 +15,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       # Collision-safe aliases - only apply in interactive shells
       if [[ $- == *i* ]]; then
         # File system replacements (safe - no script conflicts)
