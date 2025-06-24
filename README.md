@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="image.png" alt="Bleuprint Logo" width="400"/>
+  <img src="assets/image.png" alt="Bleuprint Logo" width="100%"/>
 </div>
 
 # Nix-Darwin Mac Setup Template
@@ -24,7 +24,7 @@
 
 1. Click ["Use this template"](https://github.com/YOUR-USERNAME/YOUR-REPO/generate) button above
 2. Clone your new repository
-3. Follow the [Setup Guide](./SETUP.md)
+3. Follow the [Setup Guide](./docs/SETUP.md)
 
 ### TL;DR for Experienced Users
 
@@ -37,20 +37,20 @@ cd YOUR-REPO
 # Option A: Environment file (recommended - keeps sensitive data out of repo)
 cp .env.example .env           # Copy template
 nano .env                      # Edit with your details
-./load-env-config.sh          # Apply configuration
+./scripts/load-env-config.sh   # Apply configuration
 
 # Option B: Manual configuration
 # nano modules/home/default.nix  # Set Git name/email
 # nano flake.nix                 # Set hostname/username
 
 # Optional: Interactive configuration wizard
-./auto-configure.sh
+./scripts/auto-configure.sh
 
 # Bootstrap your Mac
-./bootstrap-mac.sh
+./scripts/bootstrap-mac.sh
 
 # Verify installation
-./smoke-test.sh
+./scripts/smoke-test.sh
 ```
 
 > **⚠️ Security Notice**: This template requires manual configuration of personal details. It will NOT automatically write sensitive information like emails or SSH keys to avoid security risks in public repositories.
@@ -60,11 +60,17 @@ nano .env                      # Edit with your details
 ```
 .
 ├── flake.nix                    # Main configuration entry point
-├── bootstrap-mac.sh             # One-click setup script
-├── smoke-test.sh                # Verify installation
-├── SETUP.md                     # Detailed setup guide
-├── CONFIG_OPTIONS.md            # All configuration options
-├── CLI_CHEATSHEET.md           # Quick reference for tools
+├── scripts/                     # Setup and utility scripts
+│   ├── bootstrap-mac.sh         # One-click setup script
+│   ├── smoke-test.sh            # Verify installation
+│   ├── auto-configure.sh        # Interactive configuration wizard
+│   └── load-env-config.sh       # Environment-based configuration
+├── docs/                        # Documentation files
+│   ├── SETUP.md                 # Detailed setup guide
+│   ├── CONFIG_OPTIONS.md        # All configuration options
+│   └── CLI_CHEATSHEET.md        # Quick reference for tools
+├── assets/                      # Images and media files
+│   └── image.png                # Bleuprint logo
 └── modules/
     ├── system/
     │   ├── core.nix            # Languages, build tools, system settings
@@ -199,8 +205,9 @@ modules = [
 
 ## 🔗 Quick Links
 
-- [Configuration Options](./CONFIG_OPTIONS.md) - All available settings
-- [CLI Cheatsheet](./CLI_CHEATSHEET.md) - Quick command reference
+- [Configuration Options](./docs/CONFIG_OPTIONS.md) - All available settings
+- [CLI Cheatsheet](./docs/CLI_CHEATSHEET.md) - Quick command reference
+- [Setup Guide](./docs/SETUP.md) - Detailed installation instructions
 - [Nix-Darwin Documentation](https://github.com/LnL7/nix-darwin)
 - [Home Manager Options](https://nix-community.github.io/home-manager/options.html)
 - [Nix Package Search](https://search.nixos.org/packages)

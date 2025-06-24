@@ -29,7 +29,7 @@ generate_tool_list() {
 }
 
 # Start generating the cheatsheet
-cat > CLI_CHEATSHEET.md << 'EOF'
+cat > docs/CLI_CHEATSHEET.md << 'EOF'
 # CLI Tools Cheatsheet
 
 > 🚀 Quick reference for all 120+ CLI tools included in this configuration
@@ -57,27 +57,27 @@ EOF
 
 # Generate sections from each Nix file
 if [[ -f "modules/system/core.nix" ]]; then
-    generate_tool_list "modules/system/core.nix" "Core Development Tools" >> CLI_CHEATSHEET.md
+    generate_tool_list "modules/system/core.nix" "Core Development Tools" >> docs/CLI_CHEATSHEET.md
 fi
 
 if [[ -f "modules/system/cli-utils.nix" ]]; then
-    generate_tool_list "modules/system/cli-utils.nix" "CLI Utilities" >> CLI_CHEATSHEET.md
+    generate_tool_list "modules/system/cli-utils.nix" "CLI Utilities" >> docs/CLI_CHEATSHEET.md
 fi
 
 if [[ -f "modules/homebrew/apps.nix" ]]; then
-    echo "### GUI Applications (via Homebrew)" >> CLI_CHEATSHEET.md
-    echo "" >> CLI_CHEATSHEET.md
+    echo "### GUI Applications (via Homebrew)" >> docs/CLI_CHEATSHEET.md
+    echo "" >> docs/CLI_CHEATSHEET.md
     grep -E '^\s*"[^"]*"' modules/homebrew/apps.nix | while IFS= read -r line; do
         app=$(echo "$line" | sed 's/^\s*"//' | sed 's/".*//')
         if [[ -n "$app" ]]; then
-            echo "- **$app**" >> CLI_CHEATSHEET.md
+            echo "- **$app**" >> docs/CLI_CHEATSHEET.md
         fi
     done
-    echo "" >> CLI_CHEATSHEET.md
+    echo "" >> docs/CLI_CHEATSHEET.md
 fi
 
 # Add usage examples
-cat >> CLI_CHEATSHEET.md << 'EOF'
+cat >> docs/CLI_CHEATSHEET.md << 'EOF'
 ## Common Usage Patterns
 
 ### File Operations
@@ -177,5 +177,5 @@ Most tools can be configured via dotfiles:
 *Generated from Nix configuration - run `./generate-cli-docs.sh` to update*
 EOF
 
-echo "✅ CLI_CHEATSHEET.md generated successfully"
-echo "📝 $(wc -l < CLI_CHEATSHEET.md) lines of documentation created" 
+echo "✅ docs/CLI_CHEATSHEET.md generated successfully"
+echo "📝 $(wc -l < docs/CLI_CHEATSHEET.md) lines of documentation created" 

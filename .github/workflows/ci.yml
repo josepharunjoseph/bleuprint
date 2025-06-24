@@ -55,9 +55,9 @@ jobs:
         
     - name: Test bootstrap script integrity
       run: |
-        chmod +x bootstrap-mac.sh
+        chmod +x scripts/bootstrap-mac.sh
         # Test script validation (should pass without BOOTSTRAP_HASH set)
-        ./bootstrap-mac.sh --version || true
+        ./scripts/bootstrap-mac.sh --version || true
         
     - name: Test security scanning
       run: |
@@ -70,10 +70,10 @@ jobs:
         
     - name: Generate and validate CLI docs
       run: |
-        chmod +x generate-cli-docs.sh
-        ./generate-cli-docs.sh
+        chmod +x scripts/generate-cli-docs.sh
+        ./scripts/generate-cli-docs.sh
         # Verify docs were generated
-        if [[ ! -f CLI_CHEATSHEET.md ]]; then
+        if [[ ! -f docs/CLI_CHEATSHEET.md ]]; then
           echo "❌ CLI documentation generation failed"
           exit 1
         fi
@@ -81,14 +81,14 @@ jobs:
         
     - name: Validate smoke test
       run: |
-        chmod +x smoke-test.sh
+        chmod +x scripts/smoke-test.sh
         # Run smoke test in check mode (don't require actual installation)
         echo "Smoke test validation completed"
         
     - name: Check shell scripts
       run: |
         brew install shellcheck
-        find . -name "*.sh" -exec shellcheck {} \;
+        find scripts/ -name "*.sh" -exec shellcheck {} \;
       continue-on-error: true  # Warning only
       
     - name: Check Nix formatting
