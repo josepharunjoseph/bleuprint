@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="image.png" alt="Bleuprint Logo" width="400"/>
+</div>
+
 # Nix-Darwin Mac Setup Template
 
 > 🎯 A **template repository** for bootstrapping a modern, reproducible Mac development environment with 120+ tools using Nix-Darwin.
