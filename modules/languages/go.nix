@@ -56,7 +56,9 @@
   # Shell aliases for Go development
   environment.shellAliases = {
     # Go commands
-    g = "go";
+    # Note: We intentionally avoid using the single-letter alias `g` because it
+    # conflicts with the global Git alias defined in `modules/system/dev-tools.nix`.
+    # Prefer the explicit `go` command or the more descriptive aliases below.
     gb = "go build";
     gbr = "go build -race";                       # Build with race detector
     gr = "go run";
@@ -77,7 +79,7 @@
     gf = "gofmt -w";                              # Format code
     gfu = "gofumpt -w";                           # Format with gofumpt
     gi = "goimports -w";                          # Fix imports (from gotools)
-    gl = "golangci-lint run";                     # Run linters
+    glint = "golangci-lint run";                  # Run linters
     
     # Documentation
     gdoc = "go doc";                              # Show documentation

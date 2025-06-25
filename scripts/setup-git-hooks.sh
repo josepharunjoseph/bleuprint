@@ -97,7 +97,7 @@ echo "To bypass hook for one push (NOT recommended for public repos):"
 echo "  git push --no-verify"
 echo ""
 echo -e "${GREEN}✅ Setup complete!${NC}"
-echo "The security hook will run automatically on your next push."
+echo "The security hook will run automatically on your next push." 
 
 # Ensure we're in the git root
 cd "$(git rev-parse --show-toplevel)"

@@ -21,20 +21,20 @@
     pyright          # https://github.com/microsoft/pyright - Fast type checker (LSP)
     
     # Testing & debugging
-    pytest           # https://docs.pytest.org/ - Testing framework
-    ipython          # https://ipython.org/ - Enhanced interactive Python
-    ipdb             # https://github.com/gotcha/ipdb - IPython debugger
+    python312Packages.pytest         # https://docs.pytest.org/ - Testing framework
+    python312Packages.ipython        # https://ipython.org/ - Enhanced interactive Python
+    python312Packages.ipdb           # https://github.com/gotcha/ipdb - IPython debugger
     
     # Development tools
     poetry           # https://python-poetry.org/ - Dependency management
-    virtualenv       # https://virtualenv.pypa.io/ - Virtual environments
-    tox              # https://tox.wiki/ - Testing across Python versions
+    python312Packages.virtualenv     # https://virtualenv.pypa.io/ - Virtual environments
+    python312Packages.tox            # https://tox.wiki/ - Testing across Python versions
     
     # Documentation
-    sphinx           # https://www.sphinx-doc.org/ - Documentation generator
+    python312Packages.sphinx         # https://www.sphinx-doc.org/ - Documentation generator
     
     # Performance & profiling
-    py-spy           # https://github.com/benfred/py-spy - Sampling profiler
+    # py-spy is currently marked as broken in nixpkgs
     
     # Jupyter ecosystem (optional - can be moved to separate module)
     python312Packages.jupyter      # Interactive notebooks
@@ -65,14 +65,14 @@
     activate = "source venv/bin/activate";  # Activate venv
     
     # Code quality
-    lint = "ruff check";              # Lint with ruff
-    format = "ruff format";           # Format with ruff
+    py-lint = "ruff check";           # Lint with ruff
+    py-format = "ruff format";        # Format with ruff
     typecheck = "mypy";               # Type checking
     
     # Testing
-    test = "pytest";                  # Run tests
-    testv = "pytest -v";              # Verbose tests
-    testcov = "pytest --cov";         # Coverage testing
+    py-test = "pytest";               # Run tests
+    py-testv = "pytest -v";           # Verbose tests
+    py-testcov = "pytest --cov";      # Coverage testing
     
     # Jupyter
     lab = "jupyter lab";              # Start JupyterLab

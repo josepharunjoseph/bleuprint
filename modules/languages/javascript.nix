@@ -17,8 +17,8 @@
     prettier         # https://prettier.io/ - Code formatter
     
     # Build tools & bundlers (Bun has built-in bundling, these are for compatibility)
-    vite             # https://vitejs.dev/ - Fast build tool
     esbuild          # https://esbuild.github.io/ - Extremely fast bundler
+    # Note: vite is not available on ARM64 macOS in nixpkgs
     
     # Development tools
     nodemon          # https://nodemon.io/ - Auto-restart on changes (for Node.js projects)
@@ -66,13 +66,13 @@
     pnpm = "echo 'Use bun instead of pnpm! Bun includes package management natively.'";
     
     # Development tools
-    lint = "bun eslint";                   # Lint with ESLint via Bun
-    format = "bun prettier --write";       # Format code with Prettier via Bun
+    js-lint = "bun eslint";                # Lint with ESLint via Bun
+    js-format = "bun prettier --write";    # Format code with Prettier via Bun
     serve = "bun serve";                   # Serve static files with Bun
     
     # Testing (Bun has built-in test runner)
-    test = "bun test";                     # Run tests with Bun
-    test-watch = "bun test --watch";       # Watch mode testing
+    js-test = "bun test";                  # Run tests with Bun
+    js-test-watch = "bun test --watch";    # Watch mode testing
     
     # Create new projects (Bun equivalents)
     create-bun = "bun create";             # Create new Bun project

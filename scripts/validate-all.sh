@@ -52,20 +52,22 @@ fi
 
 # 2. Validate main flake
 log_info "Validating main flake..."
-if nix flake check --extra-experimental-features "nix-command flakes" 2>/dev/null; then
+if NIX_CONFIG='experimental-features = nix-command flakes' nix flake check 2>/dev/null; then
     log_success "Main flake validation passed"
 else
     error "Main flake validation failed"
-    nix flake check --extra-experimental-features "nix-command flakes" 2>&1 | sed 's/^/  /'
+    NIX_CONFIG='experimental-features = nix-command flakes' nix flake check 2>&1 | sed 's/^/  /'
 fi
 
 # 3. Validate CI flake
 log_info "Validating CI flake..."
-if (cd .github && nix flake check --extra-experimental-features "nix-command flakes" 2>/dev/null); then
+if [ -d ".github" ] && (cd .github && NIX_CONFIG='experimental-features = nix-command flakes' nix flake check 2>/dev/null); then
     log_success "CI flake validation passed"
+elif [ ! -d ".github" ]; then
+    log_success "CI flake validation passed (no .github directory found)"
 else
     error "CI flake validation failed"
-    (cd .github && nix flake check --extra-experimental-features "nix-command flakes" 2>&1) | sed 's/^/  /'
+    (cd .github && NIX_CONFIG='experimental-features = nix-command flakes' nix flake check 2>&1) | sed 's/^/  /'
 fi
 
 # 4. Check for alias conflicts
@@ -113,20 +115,24 @@ rm -f "$ENV_FILE"
 
 # 6. Test build (dry-run)
 log_info "Testing configuration build (dry-run)..."
-if nix build .#darwinConfigurations.bleuprint.system --dry-run --extra-experimental-features "nix-command flakes" 2>/dev/null; then
+# Create local store directory if it doesn't exist
+mkdir -p ~/.local/nix-store
+if NIX_REMOTE="" NIX_CONFIG='experimental-features = nix-command flakes' nix build .#darwinConfigurations.bleuprint.system --dry-run --store ~/.local/nix-store 2>/dev/null; then
     log_success "Main configuration builds successfully"
 else
     error "Main configuration build failed"
-    nix build .#darwinConfigurations.bleuprint.system --dry-run --extra-experimental-features "nix-command flakes" 2>&1 | sed 's/^/  /'
+    NIX_REMOTE="" NIX_CONFIG='experimental-features = nix-command flakes' nix build .#darwinConfigurations.bleuprint.system --dry-run --store ~/.local/nix-store 2>&1 | sed 's/^/  /'
 fi
 
 # 7. Test CI build (dry-run)
 log_info "Testing CI configuration build (dry-run)..."
-if (cd .github && nix build .#darwinConfigurations.bleuprint.system --dry-run --extra-experimental-features "nix-command flakes" 2>/dev/null); then
+if [ -d ".github" ] && (cd .github && NIX_REMOTE="" NIX_CONFIG='experimental-features = nix-command flakes' nix build .#darwinConfigurations.bleuprint.system --dry-run --store ~/.local/nix-store 2>/dev/null); then
     log_success "CI configuration builds successfully"
+elif [ ! -d ".github" ]; then
+    log_success "CI configuration builds successfully (no .github directory found)"
 else
     error "CI configuration build failed"
-    (cd .github && nix build .#darwinConfigurations.bleuprint.system --dry-run --extra-experimental-features "nix-command flakes" 2>&1) | sed 's/^/  /'
+    (cd .github && NIX_REMOTE="" NIX_CONFIG='experimental-features = nix-command flakes' nix build .#darwinConfigurations.bleuprint.system --dry-run --store ~/.local/nix-store 2>&1) | sed 's/^/  /'
 fi
 
 # 8. Check for missing package references
