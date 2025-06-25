@@ -41,8 +41,10 @@ jobs:
         
     - name: Test reproducibility (acceptance criteria #2)
       run: |
-        HASH1=$(nix build .#darwinConfigurations.bleuprint.system --dry-run --json | jq -r '.[0].drvPath')
-        HASH2=$(nix build .#darwinConfigurations.bleuprint.system --dry-run --json | jq -r '.[0].drvPath') 
+        # Create local store to avoid daemon issues
+        mkdir -p ~/.local/nix-store
+        HASH1=$(NIX_REMOTE="" nix build .#darwinConfigurations.bleuprint.system --dry-run --json --store ~/.local/nix-store | jq -r '.[0].drvPath')
+        HASH2=$(NIX_REMOTE="" nix build .#darwinConfigurations.bleuprint.system --dry-run --json --store ~/.local/nix-store | jq -r '.[0].drvPath') 
         if [[ "$HASH1" != "$HASH2" ]]; then
           echo "❌ Reproducibility test failed - derivation hashes differ"
           exit 1
@@ -51,7 +53,9 @@ jobs:
         
     - name: Build configuration (dry-run)
       run: |
-        cd .github && nix build .#darwinConfigurations.bleuprint.system --dry-run
+        # Use local store to avoid daemon crashes
+        mkdir -p ~/.local/nix-store
+        NIX_REMOTE="" nix build .#darwinConfigurations.bleuprint.system --dry-run --store ~/.local/nix-store
         
     - name: Test bootstrap script integrity
       run: |
