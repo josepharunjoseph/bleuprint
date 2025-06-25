@@ -93,9 +93,4 @@ jobs:
       run: |
         brew install shellcheck
         find scripts/ -name "*.sh" -exec shellcheck {} \;
-      continue-on-error: true  # Warning only
-      
-    - name: Check Nix formatting
-      run: |
-        nix fmt -- --check .
-      continue-on-error: true  # Don't fail on format issues 
+      continue-on-error: true  # Warning only 

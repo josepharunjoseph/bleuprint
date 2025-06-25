@@ -12,7 +12,11 @@
   outputs = { self, nixpkgs, nix-darwin, home-manager }:
   let 
     system = "aarch64-darwin";
+    pkgs = nixpkgs.legacyPackages.${system};
   in {
+    # Formatter for `nix fmt`
+    formatter.${system} = pkgs.nixpkgs-fmt;
+    
     darwinConfigurations."bleuprint" = nix-darwin.lib.darwinSystem {
       inherit system;
       modules = [
