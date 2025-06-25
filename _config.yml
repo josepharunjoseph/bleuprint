@@ -4,6 +4,9 @@ description: "Bootstrap your Mac with 120+ modern developer tools using Nix-Darw
 url: "https://bleulabs.github.io"
 baseurl: "/bleuprint"
 
+# Repository (required for GitHub Pages)
+repository: "bleulabs/bleuprint"
+
 # Theme
 theme: minima
 
